@@ -9,7 +9,9 @@ on:
 
 jobs:
   build:
-    runs-on: haxe:4.2.5-bullseye
+    runs-on: ubuntu-latest
+    container:
+      image: haxe:4.2.5-bullseye
     steps:
       - uses: actions/checkout@v3
       - name: build using haxe
