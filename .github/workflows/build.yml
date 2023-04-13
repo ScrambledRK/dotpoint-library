@@ -1,0 +1,16 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: haxe:4.2.5-bullseye
+    steps:
+      - uses: actions/checkout@v3
+      - name: build using haxe
+        run: haxe build-all.hxml
