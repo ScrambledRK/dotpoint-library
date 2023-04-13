@@ -1,0 +1,7 @@
+-cp src/main/hx
+-cp src/main/js
+
+--macro "include('at.dotpoint')"
+-dce no
+
+-js out/javascript/library.js

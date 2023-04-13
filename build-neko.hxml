@@ -1,0 +1,7 @@
+-cp src/main/hx
+-cp src/main/sys
+
+--macro "include('at.dotpoint')"
+-dce no
+
+-neko out/neko/library.n
