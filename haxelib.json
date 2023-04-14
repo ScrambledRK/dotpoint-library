@@ -1,0 +1,16 @@
+{
+  "name": "dotpoint-library",
+  "url" : "https://github.com/ScrambledRK/dotpoint-library/",
+  "license": "MIT",
+  "tags": ["logging","http"],
+  "description": "not to be published",
+  "releasenote": "in perpetual staleness",
+  "version": "0.0.1",
+  "classPath": [
+    "src/hx",
+    "src/js",
+    "src/sys"
+  ],
+  "contributors": ["ScrambledRK"],
+  "dependencies": {}
+}
