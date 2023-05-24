@@ -1,6 +1,6 @@
-package at.dotpoint.remote.http;
+package hx.at.dotpoint.remote.http;
 
-import at.dotpoint.remote.http.header.ResponseHeader;
+import hx.at.dotpoint.remote.http.header.ResponseHeader;
 
 /**
  *

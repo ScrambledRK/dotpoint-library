@@ -1,11 +1,11 @@
-package at.dotpoint.remote.http;
+package hx.at.dotpoint.remote.http;
 
-import at.dotpoint.validation.Assert;
-import at.dotpoint.remote.http.header.property.Accept;
-import at.dotpoint.remote.http.header.property.MimeType;
-import at.dotpoint.remote.http.header.property.Method;
-import at.dotpoint.remote.http.header.RequestHeader;
-import at.dotpoint.remote.http.url.Parameters;
+import hx.at.dotpoint.validation.Assert;
+import hx.at.dotpoint.remote.http.header.property.Accept;
+import hx.at.dotpoint.remote.http.header.property.MimeType;
+import hx.at.dotpoint.remote.http.header.property.Method;
+import hx.at.dotpoint.remote.http.header.RequestHeader;
+import hx.at.dotpoint.remote.http.url.Parameters;
 
 /**
  * GET / HTTP/1.1

@@ -1,4 +1,4 @@
-package at.dotpoint.logging.formatter;
+package hx.at.dotpoint.logging.formatter;
 
 import haxe.PosInfos;
 

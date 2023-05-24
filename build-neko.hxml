@@ -1,7 +1,7 @@
--cp src/main/hx
--cp src/main/sys
+-cp src/main/
 
---macro "include('at.dotpoint')"
+--macro "include('hx.at.dotpoint')"
+--macro "include('sys.at.dotpoint')"
 -dce no
 
 -neko out/neko/library.n

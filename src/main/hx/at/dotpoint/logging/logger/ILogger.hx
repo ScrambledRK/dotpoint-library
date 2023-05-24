@@ -1,7 +1,7 @@
-package at.dotpoint.logging.logger;
+package hx.at.dotpoint.logging.logger;
 
-import at.dotpoint.logging.LogType;
-import at.dotpoint.logging.formatter.IFormatter;
+import hx.at.dotpoint.logging.LogType;
+import hx.at.dotpoint.logging.formatter.IFormatter;
 import haxe.PosInfos;
 
 /**

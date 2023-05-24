@@ -1,4 +1,6 @@
-package at.dotpoint.validation;
+package hx.at.dotpoint.validation;
+
+import haxe.macro.Type.TConstant;
 
 class Assert {
   //
@@ -39,6 +41,9 @@ class Assert {
 
   //
   public static inline function notEmpty<T:{var length(default, null):Int;}>( value:T ):T {
+    if( value == null )
+      throw "value must not be null";
+
     if( value.length == 0 )
       throw "value must not be empty";
 
@@ -50,7 +55,7 @@ class Assert {
   // value bounds
 
   //
-  public static inline function isMinInclusive( value:Float, minimum:Float ):Float {
+  public static inline function isMinInclusive<T:Float>( value:T, minimum:Float ):T {
     if( value < minimum )
       throw '$value was not expected to be smaller than $minimum';
 
@@ -58,7 +63,7 @@ class Assert {
   }
 
   //
-  public static inline function isMinExclusive( value:Float, minimum:Float ):Float {
+  public static inline function isMinExclusive<T:Float>( value:T, minimum:Float ):T {
     if( value <= minimum )
       throw '$value was not expected to be smaller than, or equal $minimum';
 
@@ -66,7 +71,7 @@ class Assert {
   }
 
   //
-  public static inline function isMaxInclusive( value:Float, maximum:Float ):Float {
+  public static inline function isMaxInclusive<T:Float>( value:T, maximum:Float ):T {
     if( value > maximum )
       throw '$value was not expected to be greater than $maximum';
 
@@ -74,7 +79,7 @@ class Assert {
   }
 
   //
-  public static inline function isMaxExclusive( value:Float, maximum:Float ):Float {
+  public static inline function isMaxExclusive<T:Float>( value:T, maximum:Float ):T {
     if( value >= maximum )
       throw '$value was not expected to be greater than, or equal $maximum';
 

@@ -1,4 +1,4 @@
-package at.dotpoint.remote.http.url;
+package hx.at.dotpoint.remote.http.url;
 
 abstract Schema(String) from String to String {
   //

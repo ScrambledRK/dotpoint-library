@@ -1,6 +1,6 @@
-package at.dotpoint.remote.http.header.property;
+package hx.at.dotpoint.remote.http.header.property;
 
-import at.dotpoint.validation.Assert;
+import hx.at.dotpoint.validation.Assert;
 
 /**
  * application/xhtml+xml,application/xml;q=0.9

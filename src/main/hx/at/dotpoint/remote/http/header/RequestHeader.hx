@@ -1,8 +1,8 @@
-package at.dotpoint.remote.http.header;
+package hx.at.dotpoint.remote.http.header;
 
-import at.dotpoint.remote.http.header.property.Accept;
-import at.dotpoint.remote.http.header.property.EncodingType;
-import at.dotpoint.remote.http.header.property.LanguageType;
+import hx.at.dotpoint.remote.http.header.property.Accept;
+import hx.at.dotpoint.remote.http.header.property.EncodingType;
+import hx.at.dotpoint.remote.http.header.property.LanguageType;
 
 /**
 	GET / HTTP/1.1

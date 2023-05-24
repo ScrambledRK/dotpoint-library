@@ -6,11 +6,7 @@
   "description": "not to be published",
   "releasenote": "in perpetual staleness",
   "version": "0.0.1",
-  "classPath": [
-    "src/hx",
-    "src/js",
-    "src/sys"
-  ],
+  "classPath": "src/main/",
   "contributors": ["ScrambledRK"],
   "dependencies": {}
 }

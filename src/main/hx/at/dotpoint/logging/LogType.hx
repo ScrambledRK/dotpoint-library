@@ -1,9 +1,10 @@
-package at.dotpoint.logging;
+package hx.at.dotpoint.logging;
 
 /**
-  INFO, WARNING, ERROR, UNCAUGHT
+  DEBUG, INFO, WARNING, ERROR, UNCAUGHT
 **/
 enum LogType {
+	DEBUG;
 	INFO;
 	WARNING;
 	ERROR;

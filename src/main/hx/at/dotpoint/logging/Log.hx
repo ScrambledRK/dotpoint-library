@@ -1,8 +1,8 @@
-package at.dotpoint.logging;
+package hx.at.dotpoint.logging;
 
-import at.dotpoint.logging.logger.ILogger;
-import at.dotpoint.logging.logger.ILogger.NullLogger;
-import at.dotpoint.logging.logger.TraceLogger;
+import hx.at.dotpoint.logging.logger.ILogger;
+import hx.at.dotpoint.logging.logger.ILogger.NullLogger;
+import hx.at.dotpoint.logging.logger.TraceLogger;
 import haxe.CallStack;
 import haxe.PosInfos;
 
@@ -117,6 +117,16 @@ class Log {
 	// ************************************************************************ //
 	// ************************************************************************ //
 	// logging
+
+	/**
+		trace( LogType.DEBUG, ... )
+	**/
+	inline public static function debug(value:Dynamic, ?info:PosInfos):Dynamic {
+		for (logger in Log.loggerList)
+			logger.log(LogType.DEBUG, value, info);
+
+		return value;
+	}
 
 	/**
 		trace( LogType.INFO, ... )

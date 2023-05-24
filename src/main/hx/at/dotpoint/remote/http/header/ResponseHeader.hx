@@ -1,9 +1,9 @@
-package at.dotpoint.remote.http.header;
+package hx.at.dotpoint.remote.http.header;
 
-import at.dotpoint.remote.http.header.property.ContentType;
-import at.dotpoint.remote.http.header.property.Status;
-import at.dotpoint.remote.http.header.property.MimeType;
-import at.dotpoint.remote.http.header.property.EncodingType;
+import hx.at.dotpoint.remote.http.header.property.ContentType;
+import hx.at.dotpoint.remote.http.header.property.Status;
+import hx.at.dotpoint.remote.http.header.property.MimeType;
+import hx.at.dotpoint.remote.http.header.property.EncodingType;
 
 /**
 	Cache-Control:no-cache

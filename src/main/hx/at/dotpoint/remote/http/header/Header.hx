@@ -1,7 +1,7 @@
-package at.dotpoint.remote.http.header;
+package hx.at.dotpoint.remote.http.header;
 
-import at.dotpoint.remote.http.header.property.Protocol;
-import at.dotpoint.remote.http.header.property.Host;
+import hx.at.dotpoint.remote.http.header.property.Protocol;
+import hx.at.dotpoint.remote.http.header.property.Host;
 import haxe.ds.StringMap;
 
 using StringTools;

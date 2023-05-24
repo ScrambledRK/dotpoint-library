@@ -1,4 +1,4 @@
-package at.dotpoint.remote.http.header.property;
+package hx.at.dotpoint.remote.http.header.property;
 
 /**
 	"100"  ; Section 10.1.1: Continue
