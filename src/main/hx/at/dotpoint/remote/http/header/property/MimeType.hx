@@ -74,5 +74,5 @@ abstract MimeType(String) from String to String {
 	public function asAccept():Accept {
 		return new Accept(this);
 	}
-
+	
 }

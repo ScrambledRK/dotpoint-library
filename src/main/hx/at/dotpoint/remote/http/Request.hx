@@ -1,78 +1,43 @@
 package hx.at.dotpoint.remote.http;
 
-import hx.at.dotpoint.validation.Assert;
-import hx.at.dotpoint.remote.http.header.property.Accept;
-import hx.at.dotpoint.remote.http.header.property.MimeType;
-import hx.at.dotpoint.remote.http.header.property.Method;
 import hx.at.dotpoint.remote.http.header.RequestHeader;
+import hx.at.dotpoint.remote.http.header.property.Accept;
+import hx.at.dotpoint.remote.http.header.property.Method;
+import hx.at.dotpoint.remote.http.header.property.MimeType;
+import hx.at.dotpoint.remote.http.header.property.Version;
 import hx.at.dotpoint.remote.http.url.Parameters;
+import hx.at.dotpoint.remote.http.url.Url;
+import hx.at.dotpoint.validation.Assert;
 
 /**
  * GET / HTTP/1.1
  */
 class Request<T:Any> {
-	@:isVar public var url(default,null):String;
-	@:isVar public var parameter(default,null):Parameters;
+  @:isVar public var url(default, null):Url;
+  @:isVar public var method(default, null):Method;
+	
+  @:isVar public var version(default, null):Version;
+  @:isVar public var header(default, null):RequestHeader;
+  @:isVar public var body(default, null):Null<T>;
 
-	@:isVar public var header(default,null):RequestHeader;
-	@:isVar public var method(default,null):Method;
-	@:isVar public var body(default,null):Null<T>;
+  // ************************************************************************ //
+  // ************************************************************************ //
+  // Constructor
+  //
+  public function new(url:Url, ?method:Method, ?version:Version, ?header:RequestHeader, ?body:T) {
+    this.url = Assert.notNull(url);
+    this.method = method != null ? method : Method.GET;
+		
+    this.version = version != null ? version : Version.HTTP11;
+    this.header = header != null ? header : new RequestHeader();
+    this.body = body;
+  }
 
-	// ************************************************************************ //
-	// ************************************************************************ //
-	// Constructor
+  // ------------------------------------------------------------------------ //
+  // ------------------------------------------------------------------------ //
+  //
 
-	//
-	public function new(url:String, ?method:Method, ?header:RequestHeader, ?body:T) {
-		this.url = Assert.notNull(url);
-		this.parameter = Parameters.decode(this.url);
-
-		this.method = method != null ? method : Method.GET;
-		this.header = header != null ? header : new RequestHeader();
-		this.body = body;
-	}
-
-	//
-	public function clone():Request<T> {
-		var header:RequestHeader = cast this.header.copy();
-		return new Request(this.url, this.method, header, body);
-	}
-
-	// ************************************************************************ //
-	// ************************************************************************ //
-	// Methods
-
-	//
-	public function accepts(possible:Iterable<MimeType>):MimeType {
-		var list:Array<Accept> = this.header.accept;
-
-		if (list == null || list.length == 0) // TODO: guess accept type by url?
-			return null;
-
-		//
-		var st = null;
-		var sq:Float = -1;
-
-		for (p in possible) {
-			for (v in list) {
-				var vq = v.q;
-				var vt = v.type;
-
-				if (vt == p && vq > sq) { // find highest quality
-					st = vt;
-					sq = vq;
-				}
-			}
-		}
-
-		return st;
-	}
-
-	// ------------------------------------------------------------------------ //
-	// ------------------------------------------------------------------------ //
-	//
-
-	public function toString():String {
-		return '[Request: $method $url]';
-	}
+  public function toString():String {
+    return '[Request: $method $url]';
+  }
 }

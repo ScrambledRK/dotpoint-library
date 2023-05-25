@@ -1,5 +1,6 @@
 package hx.at.dotpoint.remote.http.header;
 
+import hx.at.dotpoint.remote.http.header.property.MimeType;
 import hx.at.dotpoint.remote.http.header.property.Accept;
 import hx.at.dotpoint.remote.http.header.property.EncodingType;
 import hx.at.dotpoint.remote.http.header.property.LanguageType;
@@ -23,13 +24,17 @@ class RequestHeader extends Header {
 	public var acceptLanguage(get, set):Array<LanguageType>;
 
 	//
-	public function new() {
+	public function new(?input:String) {
 		super();
+
+		if(input != null){
+			Header.decode(input, this);
+		}
 	}
 
 	// ************************************************************************ //
 	// ************************************************************************ //
-	// Methods
+	// getter/setter
 
 	//
 	inline private function get_accept():Array<Accept> {
@@ -56,5 +61,35 @@ class RequestHeader extends Header {
 
 	inline private function set_acceptLanguage(value:Array<LanguageType>):Array<LanguageType> {
 		return setArray("accept-language", value);
+	}
+
+	// ************************************************************************ //
+	// ************************************************************************ //
+	// methods
+
+	//
+	public function getAccepted(possible:Iterable<MimeType>):MimeType {
+		var list:Array<Accept> = this.accept;
+
+		if (list == null || list.length == 0) // TODO: guess accept type by url?
+			return null;
+
+		//
+		var st = null;
+		var sq:Float = -1;
+
+		for (p in possible) {
+			for (v in list) {
+				var vq = v.q;
+				var vt = v.type;
+
+				if (vt == p && vq > sq) { // find highest quality
+					st = vt;
+					sq = vq;
+				}
+			}
+		}
+
+		return st;
 	}
 }

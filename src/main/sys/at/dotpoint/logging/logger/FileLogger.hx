@@ -9,8 +9,6 @@ import hx.at.dotpoint.logging.formatter.IFormatter;
 import hx.at.dotpoint.logging.logger.ILogger;
 import hx.at.dotpoint.logging.LogType;
 
-// TODO: lock log file, release on exit, file rotation
-
 /**
 	logs to a file
 **/

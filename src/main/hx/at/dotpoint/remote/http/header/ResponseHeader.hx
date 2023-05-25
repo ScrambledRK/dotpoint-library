@@ -18,7 +18,6 @@ import hx.at.dotpoint.remote.http.header.property.EncodingType;
 	X-Powered-By:PHP/5.6.21
  */
 class ResponseHeader extends Header {
-	public var status:Null<Status>;
 	public var contentType(get, set):ContentType;
 
 	// ************************************************************************ //
@@ -26,9 +25,12 @@ class ResponseHeader extends Header {
 	// Constructor
 
 	//
-	public function new(?code:Status) {
+	public function new(?input:String) {
 		super();
-		this.status = code;
+
+		if(input != null){
+			Header.decode(input, this);
+		}
 	}
 
 	// ************************************************************************ //

@@ -1,6 +1,7 @@
 package hx.at.dotpoint.remote.http.header;
 
-import hx.at.dotpoint.remote.http.header.property.Protocol;
+import hx.at.dotpoint.validation.Assert;
+import hx.at.dotpoint.remote.http.header.property.Version;
 import hx.at.dotpoint.remote.http.header.property.Host;
 import haxe.ds.StringMap;
 
@@ -10,126 +11,92 @@ using StringTools;
  *
  */
 class Header extends StringMap<String> {
-	public var host(get, set):Host;
-	public var protocol(get, set):Protocol;
+  //
+  public function new() {
+    super();
+  }
 
-	// ************************************************************************ //
-	// ************************************************************************ //
-	// Constructor
+  //
+  public static function decode<T:Header>(input:String, output:T):T {
+    var lines:Array<String> = input.split("\r\n");
 
-	//
-	public function new() {
-		super();
-	}
-	
-	//
-	public static function decode(input:String, ?output:Header):Header {
-		if (output == null)
-			output = new Header();
+    for (line in lines) {
+      var idxColon:Int = line.indexOf(":");
 
-		//
-		var lines:Array<String> = input.split("\r\n");
+      var param:String = line.substring(0, idxColon).trim();
+      var value:String = line.substring(idxColon + 1).trim();
 
-		for (line in lines) {
-			var idxColon:Int = line.indexOf(":");
+      //
+      output.set(param, value);
+    }
 
-			var param:String = line.substring(0, idxColon).trim();
-			var value:String = line.substring(idxColon + 1).trim();
+    return output;
+  }
 
-			//
-			output.set(param, value);
-		}
+  //
+  public function encode():String {
+    var result = new Array<String>();
 
-		return output;
-	}
+    for (key in this.keys()) {
+      result.push(key + ":" + this.get(key));
+    }
 
-	//
-	public static function encode(input:Header):String {
-		var result = new Array<String>();
+    return result.join("\r\n");
+  }
 
-		for (key in input.keys()) {
-			result.push(key + ":" + input.get(key));
-		}
+  // ************************************************************************ //
+  // Methods
+  // ************************************************************************ //
+  //
+  @:generic inline private function setValue<T>(key:String, value:T):T {
+    if (value != null) {
+      this.set(key, Std.string(value));
+    } else {
+      this.remove(key);
+    }
 
-		return result.join("\r\n");
-	}
+    return value;
+  }
 
-	// ************************************************************************ //
-	// ************************************************************************ //
-	// getter / setter
+  //
+  @:generic inline private function getValue<T>(key:String, transform:String->T):T {
+    var value:String = this.get(key);
 
-	//
-	inline private function get_host():Host {
-		return this.getValue("host", Host.new);
-	}
+    if (value == null)
+      return null;
 
-	inline private function set_host(value:Host):Host {
-		return this.setValue("host", value);
-	}
+    return transform(value);
+  }
 
-	//
-	inline private function get_protocol():Protocol {
-		return this.getValue("protocol", Protocol.new);
-	}
+  //
+  @:generic inline private function setArray<T>(key:String, value:Array<T>):Array<T> {
+    if (value != null && value.length > 0) {
+      var result:String = "";
 
-	inline private function set_protocol(value:Protocol):Protocol {
-		return this.setValue("protocol", value);
-	}
+      for (v in value)
+        result += v + ",";
 
-	// ************************************************************************ //
-	// Methods
-	// ************************************************************************ //
+      this.set(key, result.substring(0, result.length - 1));
+    } else {
+      this.remove(key);
+    }
 
-	//
-	@:generic inline private function setValue<T>(key:String, value:T):T {
-		if (value != null) {
-			this.set(key, Std.string(value));
-		} else {
-			this.remove(key);
-		}
+    return value;
+  }
 
-		return value;
-	}
+  //
+  @:generic inline private function getArray<T>(key:String, transform:String->T):Array<T> {
+    var value:String = this.get(key);
 
-	//
-	@:generic inline private function getValue<T>(key:String, transform:String->T):T {
-		var value:String = this.get(key);
+    if (value != null && value.length > 0) {
+      var result:Array<T> = new Array<T>();
 
-		if (value == null)
-			return null;
+      for (type in value.split(","))
+        result.push(transform(type));
 
-		return transform(value);
-	}
+      return result;
+    }
 
-	//
-	@:generic inline private function setArray<T>(key:String, value:Array<T>):Array<T> {
-		if (value != null && value.length > 0) {
-			var result:String = "";
-
-			for (v in value)
-				result += v + ",";
-
-			this.set(key, result.substring(0, result.length - 1));
-		} else {
-			this.remove(key);
-		}
-
-		return value;
-	}
-
-	//
-	@:generic inline private function getArray<T>(key:String, transform:String->T):Array<T> {
-		var value:String = this.get(key);
-
-		if (value != null && value.length > 0) {
-			var result:Array<T> = new Array<T>();
-
-			for (type in value.split(","))
-				result.push(transform(type));
-
-			return result;
-		}
-
-		return null;
-	}
+    return null;
+  }
 }

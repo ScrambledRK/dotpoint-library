@@ -1,13 +1,14 @@
 package hx.at.dotpoint.remote.http.header.property;
 
+import haxe.display.Protocol.Version;
 import hx.at.dotpoint.validation.Assert;
 
 /**
  *
  */
-abstract Protocol(String) from String to String {
-	public static var HTTP11(default, never) = new Protocol("http/1.1");
-	public static var HTTP20(default, never) = new Protocol("http/2.0");
+abstract Version(String) from String to String {
+	public static var HTTP11(default, never) = new Version("http/1.1");
+	public static var HTTP20(default, never) = new Version("http/2.0");
 
 	//
 	public var type(get, never):String;

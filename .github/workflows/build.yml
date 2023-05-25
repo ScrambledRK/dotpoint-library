@@ -13,6 +13,7 @@ jobs:
     container:
       image: haxe:4.2.5-bullseye
     steps:
-      - uses: actions/checkout@v3
+      - name: checkout sources and library
+        uses: actions/checkout@v3
       - name: build using haxe
         run: haxe build-all.hxml

@@ -9,19 +9,20 @@ using StringTools;
  */
 class Parameters extends StringMap<String> {
 	//
-	public function new() {
+	public function new(?input:String) {
 		super();
+
+		if(input != null){
+			Parameters.decode(input,this);
+		}
 	}
 
 	//
-	public static function decode(input:String):Parameters {
-		var result:Parameters = new Parameters();
-
-		//
+	public static function decode<T:Parameters>(input:String, output:T):Parameters {
 		var idxStart = input.indexOf("?") + 1;
 
 		if (idxStart == 0)
-			return result;
+			return output;
 
 		while (idxStart < input.length) {
 			var idxEqual 		 = input.indexOf("=", idxStart);
@@ -38,22 +39,21 @@ class Parameters extends StringMap<String> {
 			var value:String = input.substring(idxEqual + 1, idxDelimiter);
 					value = value.urlDecode();
 
-			result.set(param, value);
+			output.set(param, value);
 
-			//
 			idxStart = idxDelimiter + 1;
 		}
 
 		//
-		return result;
+		return output;
 	}
 
 	//
-	public static function encode(input:Parameters):String {
+	public function encode():String {
 		var result:String = "";
 
-		for (key in input.keys()) {
-			var value:String = input.get(key);
+		for (key in this.keys()) {
+			var value:String = this.get(key);
 					value = value.urlEncode();
 
 			result += key + "=" + value + "&";

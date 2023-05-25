@@ -1,6 +1,6 @@
 {
     "indentation":{
-        "character": "space",
+        "character": "  ",
         "tabWidth": 2
     }
 }

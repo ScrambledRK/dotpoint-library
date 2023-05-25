@@ -1,4 +1,4 @@
-package hx.at.dotpoint.util;
+package hx.at.dotpoint.time;
 
 import haxe.Timer;
 
@@ -12,8 +12,8 @@ abstract Timestamp(Float) from Float to Float {
 	}
 
 	//
-	inline public function isLate(limit:Float = 0.3):Bool {
-		return Timer.stamp() - this > limit;
+	inline public function isPast(seconds:Float = 0.3):Bool {
+		return Timer.stamp() - this > seconds;
 	}
 
 	inline public function reset():Timestamp {
